@@ -3,110 +3,94 @@
     <div class="calendar__header">
       <!-- 年份 月份 -->
       <div class="calendar__control">
-        <ul>
-          <li class="calendar__arrow">❮</li>
-          <li class="calendar__indicator">
-            <span class="calendar__year">{{currentYear}}</span>
-            <span class="calendar__month">{{currentMonth}}月</span>
-          </li>
-          <li class="calendar__arrow">❯</li>
-        </ul>
+        <div class="calendar__arrow">❮</div>
+        <div class="calendar__indicator">
+          <span class="calendar__year">{{startDate.getFullYear()}}</span>
+          <span class="calendar__month">{{startDate.getMonth() + 1}}月</span>
+        </div>
+        <div class="calendar__arrow">❯</div>
       </div>
       <!-- 星期 -->
-      <ul class="calendar__weekdays">
-        <li>一</li>
-        <li>二</li>
-        <li>三</li>
-        <li>四</li>
-        <li>五</li>
-        <li style="color:red">六</li>
-        <li style="color:red">日</li>
-      </ul>
+      <div class="calendar__weekdays">
+        <div v-for="weekDay in weekDays">{{weekDay}}</div>
+      </div>
     </div>
     <!-- 日期 -->
-    <ul class="calendar__days">
-      <li @click="pick(day)" v-for="day in days">
+    <div class="calendar__days">
+      <div class="calendar__day" v-for="day in days">
         <span>{{day.getDate()}}</span>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      currentDay: 1,
-      currentMonth: 1,
-      currentYear: 1970,
-      currentWeek: 1,
-      days: [],
+  props: {
+    startMonday: {
+      type: Boolean,
+      'default': false
+    },
+    startDate: {
+      type: Date,
+      'default'() {
+        return new Date()
+      }
+    },
+    view: {
+      type: String,
+      'default': 'month'
     }
   },
-  created: function() {
-//    this.initData(null);
+  data() {
+    return {
+      currentYear: (new Date).getFullYear(),
+      currentMonth: (new Date).getMonth()
+    }
   },
-  methods: {
-    initData: function(cur) {
-      var date;
-      if (cur) {
-        date = new Date(cur);
-      } else {
-        date = new Date();
-      }
-      this.currentDay = date.getDate();
-      this.currentYear = date.getFullYear();
-      this.currentMonth = date.getMonth() + 1;
-      this.currentWeek = date.getDay(); // 1...6,0
-      if (this.currentWeek == 0) {
-        this.currentWeek = 7;
-      }
-      var str = this.formatDate(this.currentYear , this.currentMonth, this.currentDay);
-      console.log("today:" + str + "," + this.currentWeek);
-      this.days.length = 0;
-      // 今天是周日，放在第一行第7个位置，前面6个
-      for (var i = this.currentWeek - 1; i >= 0; i--) {
-        var d = new Date(str);
-        d.setDate(d.getDate() - i);
-        console.log("y:" + d.getDate());
-        this.days.push(d);
-      }
-      for (var i = 1; i <= 35 - this.currentWeek; i++) {
-        var d = new Date(str);
-        d.setDate(d.getDate() + i);
-        this.days.push(d);
-      }
-    },
-    pick: function(date) {
-      console.log(this.formatDate( date.getFullYear() , date.getMonth() + 1, date.getDate()));
-    },
-    pickPre: function(year, month) {
-      //  setDate(0); 上月最后一天
-      //  setDate(-1); 上月倒数第二天
-      //  setDate(dx) 参数dx为 上月最后一天的前后dx天
-      var d = new Date(this.formatDate(year , month , 1));
-      d.setDate(0);
-      this.initData(this.formatDate(d.getFullYear(),d.getMonth() + 1,1));
-    },
-    pickNext: function(year, month) {
-      var d = new Date(this.formatDate(year , month , 1));
-      d.setDate(35);
-      this.initData(this.formatDate(d.getFullYear(),d.getMonth() + 1,1));
-    },
-    pickYear: function(year, month) {
-      console.log(year + "," + month);
-    },
+  computed: {
+    days: {
+      get() {
+        let days = []
+        let dayslength
+        let startDay
+        let leftPadding
+        let startDate
+        if (this.view === 'month') {
+          dayslength = 35
+          startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth())
+          startDay = startDate.getDay()
+        } else {
+          dayslength = 7
+          startDate = this.startDate
+          startDay = startDate.getDay()
+        }
+        if (this.startMonday) {
+          leftPadding = startDay ? startDay - 1 : 6
+        } else {
+          leftPadding = startDay
+        }
 
-    // 返回 类似 2016-01-02 格式的字符串
-    formatDate: function(year,month,day){
-      var y  = year;
-      var m = month;
-      if(m<10) m = "0" + m;
-      var d = day;
-      if(d<10) d = "0" + d;
-      return y+"-"+m+"-"+d
+        Array.from({length: leftPadding}, (v, k) => -(k + 1)).reverse().forEach((minus) => {
+          days.push(new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + minus))
+        })
+        days.push(startDate)
+        Array.from({length: dayslength - days.length}, (v, k) => k + 1).forEach((plus) => {
+          days.push(new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + plus))
+        })
+        return days
+      }
     },
-  },
+    weekDays: {
+      get() {
+        if (this.startMonday) {
+          return ['一', '二', '三', '四', '五', '六', '日']
+        } else {
+          return ['日', '一', '二', '三', '四', '五', '六']
+        }
+      }
+    }
+  }
 }
 </script>
 
@@ -114,6 +98,49 @@ export default {
 .calendar {
   & .calendar__header {
     background: #00B8EC;
+  }
+  & .calendar__control {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+
+    & .calendar__indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+    }
+    & .calendar__month {
+      font-size: 30px;
+    }
+    & .calendar__arrow {
+      padding: 30px;
+    }
+  }
+  & .calendar__weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #00B8EC;
+    display: flex;
+    flex-wrap: wrap;
+    color: #fff;
+    justify-content: space-around;
+  }
+  & .calendar__days{
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+
+    & .calendar__day {
+      flex: 0 0 auto;
+      display: inline-block;
+      width: 14.2%;
+      text-align: center;
+      padding: 25px 0;
+      color: #000;
+    }
   }
 }
 </style>
