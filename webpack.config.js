@@ -45,6 +45,17 @@ module.exports = {
     noInfo: true,
     host: '0.0.0.0'
   },
+  vue: {
+    postcss: [require('postcss-cssnext')({
+      features: {
+        rem: false
+      }
+    }), require('postcss-pxtorem')({
+      rootValue: 20,
+      propWhiteList: []
+    })],
+    autoprefixer: false
+  },
   devtool: '#eval-source-map'
 }
 

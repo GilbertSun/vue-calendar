@@ -1,36 +1,32 @@
 <template>
   <div class="calendar">
-    <!-- 年份 月份 -->
-    <div class="month">
-      <ul>
-        <li class="arrow" @click="pickPre(currentYear,currentMonth)">❮</li>
-        <li class="year-month" @click="pickYear(currentYear,currentMonth)">
-          <span class="choose-year">{{ currentYear }}</span>
-          <span class="choose-month">{{ currentMonth }}月</span>
-        </li>
-        <li class="arrow" @click="pickNext(currentYear,currentMonth)">❯</li>
+    <div class="calendar__header">
+      <!-- 年份 月份 -->
+      <div class="calendar__control">
+        <ul>
+          <li class="calendar__arrow">❮</li>
+          <li class="calendar__indicator">
+            <span class="calendar__year">{{currentYear}}</span>
+            <span class="calendar__month">{{currentMonth}}月</span>
+          </li>
+          <li class="calendar__arrow">❯</li>
+        </ul>
+      </div>
+      <!-- 星期 -->
+      <ul class="calendar__weekdays">
+        <li>一</li>
+        <li>二</li>
+        <li>三</li>
+        <li>四</li>
+        <li>五</li>
+        <li style="color:red">六</li>
+        <li style="color:red">日</li>
       </ul>
     </div>
-    <!-- 星期 -->
-    <ul class="weekdays">
-      <li>一</li>
-      <li>二</li>
-      <li>三</li>
-      <li>四</li>
-      <li>五</li>
-      <li style="color:red">六</li>
-      <li style="color:red">日</li>
-    </ul>
     <!-- 日期 -->
-    <ul class="days">
+    <ul class="calendar__days">
       <li @click="pick(day)" v-for="day in days">
-        <!--本月-->
-        <span v-if="day.getMonth()+1 != currentMonth" class="other-month">{{ day.getDate() }}</span>
-        <span v-else>
-            <!--今天-->
-            <span v-if="day.getFullYear() == new Date().getFullYear() && day.getMonth() == new Date().getMonth() && day.getDate() == new Date().getDate()" class="active">{{ day.getDate() }}</span>
-            <span v-else>{{ day.getDate() }}</span>
-          </span>
+        <span>{{day.getDate()}}</span>
       </li>
     </ul>
   </div>
@@ -48,7 +44,7 @@ export default {
     }
   },
   created: function() {
-    this.initData(null);
+//    this.initData(null);
   },
   methods: {
     initData: function(cur) {
@@ -114,120 +110,10 @@ export default {
 }
 </script>
 
-<style>
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    font-family: Verdana, sans-serif;
-    background: #E8F0F3;
-  }
-
-  ul {
-    list-style-type: none;
-  }
-  .calendar {
-    width:100%;
-    margin: 0 auto;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  }
-  .month {
-    width: 100%;
+<style scoped>
+.calendar {
+  & .calendar__header {
     background: #00B8EC;
   }
-
-  .month ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .year-month {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .year-month:hover {
-    background: rgba(150, 2, 12, 0.1);
-  }
-
-  .choose-year {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .choose-month {
-    text-align: center;
-    font-size: 1.5rem;
-  }
-
-  .arrow {
-    padding: 30px;
-  }
-
-  .arrow:hover {
-    background: rgba(100, 2, 12, 0.1);
-  }
-
-  .month ul li {
-    color: white;
-    font-size: 20px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-  }
-
-  .weekdays {
-    margin: 0;
-    padding: 10px 0;
-    background-color: #00B8EC;
-    display: flex;
-    flex-wrap: wrap;
-    color: #FFFFFF;
-    justify-content: space-around;
-  }
-
-  .weekdays li {
-    display: inline-block;
-    width: 13.6%;
-    text-align: center;
-  }
-
-  .days {
-    padding: 0;
-    background: #FFFFFF;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-
-  .days li {
-    list-style-type: none;
-    display: inline-block;
-    width: 14.2%;
-    text-align: center;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    font-size: 1rem;
-    color: #000;
-  }
-
-  .days li .active {
-    padding: 6px 6px;
-    border-radius: 50%;
-    background: #00B8EC;
-    color: #fff;
-  }
-
-  .days li .other-month {
-    padding: 5px;
-    color: gainsboro;
-  }
-
-  .days li:hover {
-    background: #e1e1e1;
-  }
+}
 </style>
