@@ -1,15 +1,21 @@
 {
   "name": "vue-calendar",
+  "version": "0.0.1",
   "description": "A calendar component for vue.js",
+  "main": "lib/index.js",
   "author": "GilbertSun <szb4321@gmail.com>",
   "scripts": {
     "dev": "webpack-dev-server --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.production.js --progress --hide-modules"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:GilbertSun/bh-calendar.git"
   },
+  "files": [
+    "lib",
+    "src"
+  ],
   "dependencies": {
     "vue": "^1.0.0",
     "babel-runtime": "^6.0.0"

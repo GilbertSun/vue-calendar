@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Calendar from './calendar.vue'
+import Calendar from '../lib/index'
 
 new Vue({
   el: 'body',
