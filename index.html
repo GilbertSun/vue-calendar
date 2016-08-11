@@ -12,8 +12,7 @@
     </style>
   </head>
   <body>
-    <calendar :decorate="" :view="'month'" :selected="new Date()"></calendar>
-    <calendar1></calendar1>
+    <calendar :decorate="decorate" :view="'month'" :selected.sync="selected"></calendar>
     <script src="dist/build.js"></script>
   </body>
 </html>

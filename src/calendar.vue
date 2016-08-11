@@ -17,7 +17,7 @@
     </div>
     <!-- 日期 -->
     <div class="calendar__days">
-      <div class="calendar__day" v-for="day in days" :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day)}" @click="select(day)">
+      <div class="calendar__day" v-for="day in days" :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day), 'calendar__day_decorate': checkDecorate(day)}" @click="select(day)">
         <span>{{day.getDate()}}</span>
       </div>
     </div>
@@ -35,6 +35,12 @@ export default {
       type: Date,
       'default'() {
         return new Date()
+      }
+    },
+    decorate: {
+      type: Object,
+      'default'() {
+        return {}
       }
     },
     selected: {
@@ -114,6 +120,10 @@ export default {
     checkOtherMonth(day) {
       return day.getMonth() !== this.startDate.getMonth()
     },
+    checkDecorate(day) {
+      let dateFormat = day.getFullYear() + '-' + ('0' + (day.getMonth() + 1)).slice(-2) + '-' + ('0' + (day.getDate())).slice(-2)
+      return !!this.decorate[dateFormat]
+    },
     prevView() {
       if (this.view === 'month') {
         this.startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate() - 35)
@@ -170,22 +180,25 @@ export default {
     justify-content: space-around;
   }
   & .calendar__days{
-    background: #fff;
     display: flex;
     flex-wrap: wrap;
+    padding-bottom: 10px;
+    background: #fff;
+
 
     & .calendar__day {
       flex: 0 0 auto;
       display: inline-block;
       width: 14.2%;
       text-align: center;
-      padding: 25px 0;
+      padding: 10px 0;
       color: #000;
       & span {
           display: inline-block;
           width: 36px;
           height: 36px;
           line-height: 36px;
+          text-align: center;
       }
       &.calendar__day_now {
         & span {
@@ -205,6 +218,22 @@ export default {
         & span {
           border-radius: 50%;
           color: #ccc;
+        }
+      }
+      &.calendar__day_decorate {
+        position: relative;
+
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #ccc;
         }
       }
     }
