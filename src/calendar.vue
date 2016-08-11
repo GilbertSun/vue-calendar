@@ -3,12 +3,12 @@
     <div class="calendar__header">
       <!-- 年份 月份 -->
       <div class="calendar__control">
-        <div class="calendar__arrow">❮</div>
+        <div class="calendar__arrow" @click="prevView">❮</div>
         <div class="calendar__indicator">
           <span class="calendar__year">{{startDate.getFullYear()}}</span>
           <span class="calendar__month">{{startDate.getMonth() + 1}}月</span>
         </div>
-        <div class="calendar__arrow">❯</div>
+        <div class="calendar__arrow" @click="nextView">❯</div>
       </div>
       <!-- 星期 -->
       <div class="calendar__weekdays">
@@ -17,7 +17,7 @@
     </div>
     <!-- 日期 -->
     <div class="calendar__days">
-      <div class="calendar__day" v-for="day in days">
+      <div class="calendar__day" v-for="day in days" :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day)}" @click="select(day)">
         <span>{{day.getDate()}}</span>
       </div>
     </div>
@@ -37,6 +37,12 @@ export default {
         return new Date()
       }
     },
+    selected: {
+      type: Date,
+      'default'() {
+        return new Date()
+      }
+    },
     view: {
       type: String,
       'default': 'month'
@@ -44,8 +50,6 @@ export default {
   },
   data() {
     return {
-      currentYear: (new Date).getFullYear(),
-      currentMonth: (new Date).getMonth()
     }
   },
   computed: {
@@ -89,6 +93,43 @@ export default {
           return ['日', '一', '二', '三', '四', '五', '六']
         }
       }
+    }
+  },
+  methods: {
+    checkToday(day) {
+      let now = new Date()
+      return !!(
+        day.getFullYear() === now.getFullYear() &&
+        day.getMonth() === now.getMonth() &&
+        day.getDate() === now.getDate()
+      )
+    },
+    checkSelected(day) {
+      return !!(
+        day.getFullYear() === this.selected.getFullYear() &&
+        day.getMonth() === this.selected.getMonth() &&
+        day.getDate() === this.selected.getDate()
+      )
+    },
+    checkOtherMonth(day) {
+      return day.getMonth() !== this.startDate.getMonth()
+    },
+    prevView() {
+      if (this.view === 'month') {
+        this.startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate() - 35)
+      } else {
+        this.startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate() - 7)
+      }
+    },
+    nextView() {
+      if (this.view === 'month') {
+        this.startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate() + 35)
+      } else {
+        this.startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate() + 7)
+      }
+    },
+    select(day) {
+      this.selected = day
     }
   }
 }
@@ -140,6 +181,32 @@ export default {
       text-align: center;
       padding: 25px 0;
       color: #000;
+      & span {
+          display: inline-block;
+          width: 36px;
+          height: 36px;
+          line-height: 36px;
+      }
+      &.calendar__day_now {
+        & span {
+            border-radius: 50%;
+            background: #ccc;
+            color: #fff;
+        }
+      }
+      &.calendar__day_selected {
+        & span {
+          border-radius: 50%;
+          background: #2196F3;
+          color: #fff;
+        }
+      }
+      &.calendar__day_othermonth {
+        & span {
+          border-radius: 50%;
+          color: #ccc;
+        }
+      }
     }
   }
 }
