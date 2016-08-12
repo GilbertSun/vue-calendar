@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: './src/calendar.vue',
@@ -42,6 +43,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new ExtractTextPlugin("index.css"),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -55,6 +57,9 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin()
   ],
   vue: {
+    loaders: {
+      css: ExtractTextPlugin.extract("css")
+    },
     postcss: [require('postcss-cssnext')({
       features: {
         rem: false
