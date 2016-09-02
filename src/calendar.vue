@@ -205,7 +205,7 @@ export default {
         & span {
             border-radius: 50%;
             background: #ccc;
-            color: #fff;
+            color: #fff !important;
         }
       }
       &.calendar__day_selected {
