@@ -168,6 +168,7 @@ export default {
       font-size: 30px;
     }
     & .calendar__arrow {
+      font-size: 2rem;
       padding: 30px;
     }
   }
