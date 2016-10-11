@@ -149,7 +149,7 @@ export default {
 .calendar {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   & .calendar__header {
-    background: #00B8EC;
+    background: #77c3f4;
   }
   & .calendar__control {
     margin: 0;
@@ -175,7 +175,7 @@ export default {
   & .calendar__weekdays {
     margin: 0;
     padding: 10px 0;
-    background-color: #00B8EC;
+    background-color: #77c3f4;
     display: flex;
     flex-wrap: wrap;
     color: #fff;
@@ -212,7 +212,7 @@ export default {
       &.calendar__day_selected {
         & span {
           border-radius: 50%;
-          background: #2196F3;
+          background: #379ff4;
           color: #fff;
         }
       }
