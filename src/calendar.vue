@@ -52,6 +52,12 @@ export default {
     view: {
       type: String,
       'default': 'month'
+    },
+    currentView: {
+      type: Object,
+      'default'() {
+        return {}
+      }
     }
   },
   data() {
@@ -101,6 +107,14 @@ export default {
       }
     }
   },
+  watch: {
+    days() {
+      this.currentView = {
+        start: this.days[0],
+        end: this.days[this.days.length - 1]
+      }
+    }
+  },
   methods: {
     checkToday(day) {
       let now = new Date()
@@ -140,6 +154,12 @@ export default {
     },
     select(day) {
       this.selected = day
+    }
+  },
+  ready() {
+    this.currentView = {
+      start: this.days[0],
+      end: this.days[this.days.length - 1]
     }
   }
 }
