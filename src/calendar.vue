@@ -1,6 +1,6 @@
 <template>
   <div class="calendar">
-    <div class="calendar__header">
+    <div class="calendar__header" v-bind:style="{'background': headerBackgroundColor}">
       <!-- 年份 月份 -->
       <div class="calendar__control">
         <div class="calendar__arrow" @click="prevView">❮</div>
@@ -11,14 +11,15 @@
         <div class="calendar__arrow" @click="nextView">❯</div>
       </div>
       <!-- 星期 -->
-      <div class="calendar__weekdays">
+      <div class="calendar__weekdays" v-bind:style="{'background-color': headerBackgroundColor}">
         <div v-for="weekDay in weekDays">{{weekDay}}</div>
       </div>
     </div>
     <!-- 日期 -->
     <div class="calendar__days">
       <div class="calendar__day" v-for="day in days" :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day), 'calendar__day_decorate': checkDecorate(day)}" @click="select(day)">
-        <span>{{day.getDate()}}</span>
+        <span v-if="checkSelected(day)" v-bind:style="{'background': selectedItemColor}">{{day.getDate()}}</span>
+        <span v-else>{{day.getDate()}}</span>
       </div>
     </div>
   </div>
@@ -58,6 +59,14 @@ export default {
       'default'() {
         return {}
       }
+    },
+    headerBackgroundColor: {
+      type: String,
+      'default': '#77c3f4'
+    },
+    selectedItemColor: {
+      type: String,
+      'default': '#379ff4'
     }
   },
   data() {
@@ -168,9 +177,6 @@ export default {
 <style scoped>
 .calendar {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  & .calendar__header {
-    background: #77c3f4;
-  }
   & .calendar__control {
     margin: 0;
     padding: 0;
@@ -195,7 +201,6 @@ export default {
   & .calendar__weekdays {
     margin: 0;
     padding: 10px 0;
-    background-color: #77c3f4;
     display: flex;
     flex-wrap: wrap;
     color: #fff;
@@ -232,7 +237,6 @@ export default {
       &.calendar__day_selected {
         & span {
           border-radius: 50%;
-          background: #379ff4;
           color: #fff;
         }
       }
