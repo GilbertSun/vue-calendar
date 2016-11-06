@@ -5,13 +5,13 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
   entry: './src/calendar.vue',
   output: {
-    path: path.resolve(__dirname, './lib'),
+    path: path.resolve(__dirname, '../lib'),
     filename: 'index.js',
     library: 'VueCalendar',
     libraryTarget: 'umd'
   },
   resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
+    root: path.join(__dirname, '../node_modules'),
   },
   module: {
     loaders: [
