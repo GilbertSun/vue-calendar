@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "author": "GilbertSun <szb4321@gmail.com>",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.production.js --progress --hide-modules",
+    "dev": "webpack-dev-server --config webpack.config.demo.js --inline --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "prepublish": "npm run build"
   },
   "repository": {

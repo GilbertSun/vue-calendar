@@ -1,12 +1,14 @@
 var path = require('path')
 var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/calendar.vue',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    path: path.resolve(__dirname, './lib'),
+    filename: 'index.js',
+    library: 'VueCalendar',
+    libraryTarget: 'umd'
   },
   resolveLoader: {
     root: path.join(__dirname, 'node_modules'),
@@ -40,29 +42,8 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    host: '0.0.0.0'
-  },
-  vue: {
-    postcss: [require('postcss-cssnext')({
-      features: {
-        rem: false
-      }
-    }), require('postcss-pxtorem')({
-      rootValue: 20,
-      propWhiteList: []
-    })],
-    autoprefixer: false
-  },
-  devtool: '#eval-source-map'
-}
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
+  plugins: [
+    new ExtractTextPlugin("index.css"),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -74,5 +55,19 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new webpack.optimize.OccurenceOrderPlugin()
-  ])
+  ],
+  vue: {
+    loaders: {
+      css: ExtractTextPlugin.extract("css")
+    },
+    postcss: [require('postcss-cssnext')({
+      features: {
+        rem: false
+      }
+    }), require('postcss-pxtorem')({
+      rootValue: 20,
+      propWhiteList: []
+    })],
+    autoprefixer: false
+  }
 }
