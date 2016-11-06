@@ -2,14 +2,19 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './demo/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'build.js'
   },
+  resolve: {
+    alias: {
+      src: path.join(__dirname, '../src'),
+    }
+  },
   resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
+    root: path.join(__dirname, '../node_modules'),
   },
   module: {
     loaders: [
@@ -41,6 +46,7 @@ module.exports = {
     ]
   },
   devServer: {
+    contentBase: path.resolve(__dirname, '../demo'),
     historyApiFallback: true,
     noInfo: true,
     host: '0.0.0.0'
