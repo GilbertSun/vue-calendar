@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --config ./build/webpack.config.demo.js --inline --hot",
     "deploy": "sh build/release.sh",
     "build": "webpack --config ./build/webpack.config.js --progress --hide-modules",
-    "pub": "npm version patch && npm publish",
+    "pub": "npm version patch && npm publish && git push --all",
     "prepublish": "npm run build"
   },
   "repository": {
