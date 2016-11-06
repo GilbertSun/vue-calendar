@@ -6,6 +6,7 @@
   "author": "GilbertSun <szb4321@gmail.com>",
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.config.demo.js --inline --hot",
+    "deploy": "webpack --config ./build/webpack.config.demo.js --progress --hide-modules",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "prepublish": "npm run build"
   },
