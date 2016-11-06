@@ -1,18 +1,67 @@
-# vue-calendar
+vue-calendar
+===
+A calendar component for vue.js **compitable with vue 1.x**
 
-> A calendar component for vue.js
+## examples
 
-## Build Setup
+website: [GilbertSun/vue-calendar](http://gilbertsun.github.io/vue-calendar)
 
-``` bash
-# install dependencies
-npm install
+## install & use
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
+```
+npm install vue-mobile-calendar
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+use in a vue component
+
+```html
+<template>
+<calendar :view="'month'"></calendar>
+</template>
+
+<script>
+import Calendar from 'vue-calendar-mobile'
+
+export default {
+  components: {
+    Calendar
+  }
+}
+</script>
+
+```
+
+## Develope
+
+you want to change the source and see what's you change
+
+```bash
+$ make dev
+```
+
+it will server a locale demo page in http://localhost:8080
+
+then you change change the source code in `src` directory
+
+**refresh the demo page**
+
+```bash
+$ make deploy
+```
+
+**publish to npm**
+
+```bash
+$ make pub
+```
+
+## API
+
+| prop                  | type    | description | example | default value |
+|:----------------------|:--------|:-------------: |:-------- |:-------- |
+| startMonday           | Boolean | is the week start from monday, true for monday and false for sunday | true | false |
+| startDate             | Date    | this start Date to control the first view to show startDate | new Date(2016, 11, 6) | new Date() |
+| decorate              | Object  | control the date to have a dot docorate | `{'2016-08-09': true}` | {} |
+| selected              | Date    | current select date | new Date(2016, 11, 6) | new Date() |
+| view                  | String  | show to month view of week view | 'month', 'week' | 'month' |
+| currentView           | Object  | cureent shown view | {}, simple pass a clean object | `{start: Object, end: Object}` |
