@@ -5,8 +5,8 @@
       <div class="calendar__control">
         <div class="calendar__arrow" @click="prevView">❮</div>
         <div class="calendar__indicator">
-          <span class="calendar__year">{{startDate.getFullYear()}}</span>
-          <span class="calendar__month">{{startDate.getMonth() + 1}}月</span>
+          <span class="calendar__indicator-main">{{startDate.getFullYear()}}</span>
+          <span class="calendar__indicator-detail">{{startDate.getMonth() + 1}}月</span>
         </div>
         <div class="calendar__arrow" @click="nextView">❯</div>
       </div>
@@ -204,7 +204,8 @@ export default {
       align-items: center;
       justify-content: space-around;
     }
-    & .calendar__month {
+    & .calendar__indicator-detail {
+      color: #31b29c;
       margin-left: 10px;
     }
     & .calendar__arrow {
@@ -216,6 +217,7 @@ export default {
     display: flex;
   }
   & .calendar__today {
+    flex: none;
     width: 20px;
     padding: 5px 0;
     margin-left: 8px;
@@ -227,6 +229,7 @@ export default {
     color: #fff;
   }
   & .calendar__date {
+    width: 100px;
     flex: 1 0 auto;
   }
   & .calendar__weekdays {
