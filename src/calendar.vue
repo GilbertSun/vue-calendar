@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="calendar__main">
-      <div class="calendar__today" @click="startDate = new Date">
+      <div class="calendar__today" @click="startDate = new Date, selected = new Date">
         今天
       </div>
       <div class="calendar__date">
@@ -283,14 +283,14 @@ export default {
         &:after {
           content: '';
           position: absolute;
-          bottom: 0;
+          bottom: 2px;
           left: 0;
           right: 0;
           margin: auto;
-          width: 8px;
-          height: 8px;
+          width: 4px;
+          height: 4px;
           border-radius: 50%;
-          background: #ccc;
+          background: #eb4f04;
         }
       }
     }
