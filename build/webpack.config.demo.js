@@ -56,9 +56,6 @@ module.exports = {
       features: {
         rem: false
       }
-    }), require('postcss-pxtorem')({
-      rootValue: 20,
-      propWhiteList: []
     })],
     autoprefixer: false
   },

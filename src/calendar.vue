@@ -1,6 +1,6 @@
 <template>
   <div class="calendar">
-    <div class="calendar__header" v-bind:style="{'background': headerBackgroundColor}">
+    <div class="calendar__header">
       <!-- 年份 月份 -->
       <div class="calendar__control">
         <div class="calendar__arrow" @click="prevView">❮</div>
@@ -10,16 +10,20 @@
         </div>
         <div class="calendar__arrow" @click="nextView">❯</div>
       </div>
+    </div>
+    <div class="calendar__main">
       <!-- 星期 -->
-      <div class="calendar__weekdays" v-bind:style="{'background-color': headerBackgroundColor}">
+      <div class="calendar__weekdays">
         <div v-for="weekDay in weekDays">{{weekDay}}</div>
       </div>
-    </div>
-    <!-- 日期 -->
-    <div class="calendar__days">
-      <div class="calendar__day" v-for="day in days" :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day), 'calendar__day_decorate': checkDecorate(day)}" @click="select(day)">
-        <span v-if="checkSelected(day)" v-bind:style="{'background': selectedItemColor}">{{day.getDate()}}</span>
-        <span v-else>{{day.getDate()}}</span>
+      <!-- 日期 -->
+      <div class="calendar__days">
+        <div class="calendar__day" v-for="day in days"
+             :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day), 'calendar__day_decorate': checkDecorate(day)}"
+             @click="select(day)">
+          <span v-if="checkSelected(day)" v-bind:style="{'background': selectedItemColor}">{{day.getDate()}}</span>
+          <span v-else>{{day.getDate()}}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -176,35 +180,40 @@ export default {
 
 <style scoped>
 .calendar {
+  font-size: 14px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  & .calendar__header {
+    padding: 25px 0;
+  }
   & .calendar__control {
-    margin: 0;
+    width: 60%;
+    margin: 0 auto;
     padding: 0;
     display: flex;
     justify-content: space-between;
-    color: #fff;
+    color: #1e2329;
 
     & .calendar__indicator {
       display: flex;
-      flex-direction: column;
+      /*flex-direction: column;*/
       align-items: center;
       justify-content: space-around;
     }
     & .calendar__month {
-      font-size: 30px;
+      margin-left: 10px;
     }
     & .calendar__arrow {
-      font-size: 2rem;
-      padding: 30px;
+      /*font-size: 2rem;*/
+      /*padding: 30px;*/
     }
   }
   & .calendar__weekdays {
     margin: 0;
-    padding: 10px 0;
     display: flex;
     flex-wrap: wrap;
-    color: #fff;
     justify-content: space-around;
+    font-size: 12px;
+    color: #1e2329;
   }
   & .calendar__days{
     display: flex;
@@ -217,14 +226,14 @@ export default {
       flex: 0 0 auto;
       display: inline-block;
       width: 14.2%;
+      margin: 3px 0;
       text-align: center;
-      padding: 10px 0;
       color: #000;
       & span {
           display: inline-block;
-          width: 36px;
-          height: 36px;
-          line-height: 36px;
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
           text-align: center;
       }
       &.calendar__day_now {
