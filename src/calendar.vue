@@ -12,17 +12,22 @@
       </div>
     </div>
     <div class="calendar__main">
-      <!-- 星期 -->
-      <div class="calendar__weekdays">
-        <div v-for="weekDay in weekDays">{{weekDay}}</div>
+      <div class="calendar__today">
+        今天
       </div>
-      <!-- 日期 -->
-      <div class="calendar__days">
-        <div class="calendar__day" v-for="day in days"
-             :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day), 'calendar__day_decorate': checkDecorate(day)}"
-             @click="select(day)">
-          <span v-if="checkSelected(day)" v-bind:style="{'background': selectedItemColor}">{{day.getDate()}}</span>
-          <span v-else>{{day.getDate()}}</span>
+      <div class="calendar__date">
+        <!-- 星期 -->
+        <div class="calendar__weekdays">
+          <div v-for="weekDay in weekDays">{{weekDay}}</div>
+        </div>
+        <!-- 日期 -->
+        <div class="calendar__days">
+          <div class="calendar__day" v-for="day in days"
+               :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day), 'calendar__day_decorate': checkDecorate(day)}"
+               @click="select(day)">
+            <span v-if="checkSelected(day)" v-bind:style="{'background': selectedItemColor}">{{day.getDate()}}</span>
+            <span v-else>{{day.getDate()}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -70,7 +75,7 @@ export default {
     },
     selectedItemColor: {
       type: String,
-      'default': '#379ff4'
+      'default': '#EB4F04'
     }
   },
   data() {
@@ -206,6 +211,23 @@ export default {
       /*font-size: 2rem;*/
       /*padding: 30px;*/
     }
+  }
+  & .calendar__main {
+    display: flex;
+  }
+  & .calendar__today {
+    width: 20px;
+    padding: 5px 0;
+    margin-left: 8px;
+    border-radius: 10px;
+    align-self: flex-start;
+    background: #31b29c;
+    font-size: 11px;
+    text-align: center;
+    color: #fff;
+  }
+  & .calendar__date {
+    flex: 1 0 auto;
   }
   & .calendar__weekdays {
     margin: 0;
