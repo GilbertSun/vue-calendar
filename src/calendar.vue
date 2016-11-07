@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="calendar__main">
-      <div class="calendar__today">
+      <div class="calendar__today" @click="startDate = new Date">
         今天
       </div>
       <div class="calendar__date">
