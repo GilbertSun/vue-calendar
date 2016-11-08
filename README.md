@@ -59,9 +59,12 @@ $ make pub
 
 | prop                  | type    | description | example | default value |
 |:----------------------|:--------|:-------------: |:-------- |:-------- |
+| currentView           | Object  | cureent shown view | {}, simple pass a clean object | `{start: Object, end: Object}` |
+| decorate              | Object  | control the date to have a dot docorate | `{'2016-08-09': true}` | {} |
+| i18n                  | String  | control week name language | `'zh-cn', 'en'` | `'zh-cn'` |
+| indicator             | Object  | control the header indicator default the year and month| `{title: ..., main: ...}` | `{}` |
+| selected              | Date    | current select date | new Date(2016, 11, 6) | new Date() |
 | startMonday           | Boolean | is the week start from monday, true for monday and false for sunday | true | false |
 | startDate             | Date    | this start Date to control the first view to show startDate | new Date(2016, 11, 6) | new Date() |
-| decorate              | Object  | control the date to have a dot docorate | `{'2016-08-09': true}` | {} |
-| selected              | Date    | current select date | new Date(2016, 11, 6) | new Date() |
 | view                  | String  | show to month view of week view | 'month', 'week' | 'month' |
-| currentView           | Object  | cureent shown view | {}, simple pass a clean object | `{start: Object, end: Object}` |
+

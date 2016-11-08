@@ -217,7 +217,7 @@ export default {
     },
     i18n: {
       type: String,
-      'default': 'en'
+      'default': 'zh-cn'
     },
     indicator: {
       type: Object,
