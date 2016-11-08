@@ -141,6 +141,7 @@
       width: 14.2%;
       margin: 3px 0;
       text-align: center;
+      font-size: 12px;
       color: #000;
       & span {
           display: inline-block;
