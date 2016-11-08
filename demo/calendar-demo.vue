@@ -24,9 +24,7 @@
     data() {
       return {
         view: 'week',
-        decorate: {
-//          '2016-11-09': true
-        }
+        decorate: {}
       }
     },
     computed: {
