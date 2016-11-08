@@ -59,7 +59,7 @@ module.exports = {
     })],
     autoprefixer: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {

@@ -25,8 +25,6 @@
           '2016-08-11': true
         },
         indicator: {
-          title: '2016年第一学期',
-          detail: '17周'
         },
         headerBackgroundColor: '#77c3f4',
         currentView: {}
