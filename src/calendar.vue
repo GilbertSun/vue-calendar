@@ -125,7 +125,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    font-size: 12px;
+    font-size: 11px;
     color: #1e2329;
     & .calendar__weekday {
       width: 14.2%;
