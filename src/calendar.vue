@@ -37,6 +37,134 @@
   </div>
 </template>
 
+<style scoped>
+.calendar {
+  font-size: 14px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  & .calendar__header {
+    position: relative;
+    padding: 25px 0;
+  }
+  & .calendar__action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 10px;
+  }
+  & .calendar__control {
+    width: 60%;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    color: #1e2329;
+
+    & .calendar__indicator {
+      display: flex;
+      /*flex-direction: column;*/
+      align-items: center;
+      justify-content: space-around;
+    }
+    & .calendar__indicator-detail {
+      color: #31b29c;
+      margin-left: 10px;
+    }
+    & .calendar__arrow {
+      /*font-size: 2rem;*/
+      /*padding: 30px;*/
+    }
+  }
+  & .calendar__main {
+    display: flex;
+  }
+  & .calendar__today {
+    flex: none;
+    width: 20px;
+    padding: 5px 0;
+    margin-left: 8px;
+    border-radius: 10px;
+    align-self: flex-start;
+    background: #31b29c;
+    font-size: 11px;
+    text-align: center;
+    color: #fff;
+  }
+  & .calendar__date {
+    width: 100px;
+    flex: 1 0 auto;
+  }
+  & .calendar__weekdays {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 12px;
+    color: #1e2329;
+  }
+  & .calendar__days{
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    background: #fff;
+
+
+    & .calendar__day {
+      flex: 0 0 auto;
+      display: inline-block;
+      width: 14.2%;
+      margin: 3px 0;
+      text-align: center;
+      color: #000;
+      & span {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+      }
+      &.calendar__day_now {
+        & span {
+            border-radius: 50%;
+            background: #f5a781;
+            color: #fff !important;
+        }
+      }
+      &.calendar__day_selected {
+        & span {
+          border-radius: 50%;
+          color: #fff;
+        }
+      }
+      &.calendar__day_othermonth {
+        & span {
+          border-radius: 50%;
+          color: #ccc;
+        }
+      }
+      &.calendar__day_decorate {
+        position: relative;
+
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 2px;
+          left: 0;
+          right: 0;
+          margin: auto;
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: #eb4f04;
+        }
+      }
+    }
+  }
+}
+</style>
+
 <script>
 export default {
   props: {
@@ -185,131 +313,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.calendar {
-  font-size: 14px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  & .calendar__header {
-    position: relative;
-    padding: 25px 0;
-  }
-  & .calendar__action {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    right: 10px;
-  }
-  & .calendar__control {
-    width: 60%;
-    margin: 0 auto;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    color: #1e2329;
-
-    & .calendar__indicator {
-      display: flex;
-      /*flex-direction: column;*/
-      align-items: center;
-      justify-content: space-around;
-    }
-    & .calendar__indicator-detail {
-      color: #31b29c;
-      margin-left: 10px;
-    }
-    & .calendar__arrow {
-      /*font-size: 2rem;*/
-      /*padding: 30px;*/
-    }
-  }
-  & .calendar__main {
-    display: flex;
-  }
-  & .calendar__today {
-    flex: none;
-    width: 20px;
-    padding: 5px 0;
-    margin-left: 8px;
-    border-radius: 10px;
-    align-self: flex-start;
-    background: #31b29c;
-    font-size: 11px;
-    text-align: center;
-    color: #fff;
-  }
-  & .calendar__date {
-    width: 100px;
-    flex: 1 0 auto;
-  }
-  & .calendar__weekdays {
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    font-size: 12px;
-    color: #1e2329;
-  }
-  & .calendar__days{
-    display: flex;
-    flex-wrap: wrap;
-    padding-bottom: 10px;
-    background: #fff;
-
-
-    & .calendar__day {
-      flex: 0 0 auto;
-      display: inline-block;
-      width: 14.2%;
-      margin: 3px 0;
-      text-align: center;
-      color: #000;
-      & span {
-          display: inline-block;
-          width: 30px;
-          height: 30px;
-          line-height: 30px;
-          text-align: center;
-      }
-      &.calendar__day_now {
-        & span {
-            border-radius: 50%;
-            background: #f5a781;
-            color: #fff !important;
-        }
-      }
-      &.calendar__day_selected {
-        & span {
-          border-radius: 50%;
-          color: #fff;
-        }
-      }
-      &.calendar__day_othermonth {
-        & span {
-          border-radius: 50%;
-          color: #ccc;
-        }
-      }
-      &.calendar__day_decorate {
-        position: relative;
-
-        &:after {
-          content: '';
-          position: absolute;
-          bottom: 2px;
-          left: 0;
-          right: 0;
-          margin: auto;
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background: #eb4f04;
-        }
-      }
-    }
-  }
-}
-</style>
