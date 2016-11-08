@@ -3,12 +3,12 @@
     <div class="calendar__header">
       <!-- 年份 月份 -->
       <div class="calendar__control">
-        <div class="calendar__arrow" @click="prevView">❮</div>
+        <div class="calendar__arrow left" @click="prevView"></div>
         <div class="calendar__indicator">
-          <span class="calendar__indicator-main">{{startDate.getFullYear()}}</span>
-          <span class="calendar__indicator-detail">{{startDate.getMonth() + 1}}月</span>
+          <span class="calendar__indicator-title">{{shownIndicator.title}}</span>
+          <span class="calendar__indicator-detail">{{shownIndicator.detail}}</span>
         </div>
-        <div class="calendar__arrow" @click="nextView">❯</div>
+        <div class="calendar__arrow right" @click="nextView"></div>
       </div>
       <div class="calendar__action">
         <slot name="action"></slot>
@@ -55,26 +55,50 @@
     right: 10px;
   }
   & .calendar__control {
-    width: 60%;
+    width: 240px;
     margin: 0 auto;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
     color: #1e2329;
 
     & .calendar__indicator {
       display: flex;
-      /*flex-direction: column;*/
       align-items: center;
       justify-content: space-around;
+      font-weight: bold;
     }
     & .calendar__indicator-detail {
       color: #31b29c;
       margin-left: 10px;
     }
     & .calendar__arrow {
-      /*font-size: 2rem;*/
-      /*padding: 30px;*/
+      width: 44px;
+      text-align: center;
+
+      &.right {
+        &:after {
+          display: inline-block;
+          content: '';
+          width: 0;
+          height: 0;
+          border-top: 5px solid transparent;
+          border-bottom: 5px solid transparent;
+          border-left: 5px solid #c7d2d0;
+        }
+      }
+      &.left {
+        &:after {
+          display: inline-block;
+          content: '';
+          width: 0;
+          height: 0;
+          border-top: 5px solid #fff;
+          border-bottom: 5px solid #fff;
+          border-right: 5px solid #c7d2d0;
+        }
+      }
     }
   }
   & .calendar__main {
@@ -207,6 +231,12 @@ export default {
     selectedItemColor: {
       type: String,
       'default': '#EB4F04'
+    },
+    indicator: {
+      type: Object,
+      'default'() {
+        return {}
+      }
     }
   },
   data() {
@@ -214,6 +244,23 @@ export default {
     }
   },
   computed: {
+    shownIndicator: {
+      get() {
+        let indicator = {}
+        if (this.indicator.title) {
+          indicator.title = this.indicator.title
+        } else {
+          indicator.title = this.startDate.getFullYear()
+        }
+
+        if (this.indicator.detail) {
+          indicator.detail = this.indicator.detail
+        } else {
+          indicator.detail = this.startDate.getMonth() + 1 + '月'
+        }
+        return indicator
+      }
+    },
     days: {
       get() {
         let days = []
