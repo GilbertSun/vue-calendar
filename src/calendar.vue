@@ -21,7 +21,7 @@
       <div class="calendar__date">
         <!-- 星期 -->
         <div class="calendar__weekdays">
-          <div v-for="weekDay in weekDays">{{weekDay}}</div>
+          <div v-for="weekDay in weekDays" class="calendar__weekday">{{weekDay}}</div>
         </div>
         <!-- 日期 -->
         <div class="calendar__days">
@@ -127,6 +127,11 @@
     justify-content: space-around;
     font-size: 12px;
     color: #1e2329;
+    & .calendar__weekday {
+      width: 14.2%;
+      flex: 1 0 auto;
+      text-align: center;
+    }
   }
   & .calendar__days{
     display: flex;
@@ -191,6 +196,10 @@
 </style>
 
 <script>
+const I18N = {
+  'zh-cn': ['日', '一', '二', '三', '四', '五', '六'],
+  'en': ['SUN', 'MON', 'TUN', 'WED', 'THU', 'FRI', 'SAT']
+}
 export default {
   props: {
     startMonday: {
@@ -238,10 +247,10 @@ export default {
       'default'() {
         return {}
       }
-    }
-  },
-  data() {
-    return {
+    },
+    i18n: {
+      type: String,
+      'default': 'en'
     }
   },
   computed: {
@@ -296,11 +305,12 @@ export default {
     },
     weekDays: {
       get() {
+        let weekDayNames = I18N[this.i18n]
         if (this.startMonday) {
-          return ['一', '二', '三', '四', '五', '六', '日']
-        } else {
-          return ['日', '一', '二', '三', '四', '五', '六']
+          let sunday = weekDayNames.shif()
+          weekDayNames.push(sunday)
         }
+        return weekDayNames
       }
     }
   },
