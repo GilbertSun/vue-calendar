@@ -28,7 +28,7 @@
           <div class="calendar__day" v-for="day in days"
                :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day), 'calendar__day_decorate': checkDecorate(day)}"
                @click="select(day)">
-            <span v-if="checkSelected(day)" v-bind:style="{'background': selectedItemColor}">{{day.getDate()}}</span>
+            <span v-if="checkSelected(day)">{{day.getDate()}}</span>
             <span v-else>{{day.getDate()}}</span>
           </div>
         </div>
@@ -41,6 +41,8 @@
 .calendar {
   font-size: 14px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background: #fff;
+
   & .calendar__header {
     position: relative;
     padding: 25px 0;
@@ -94,8 +96,8 @@
           content: '';
           width: 0;
           height: 0;
-          border-top: 5px solid #fff;
-          border-bottom: 5px solid #fff;
+          border-top: 5px solid transparent;
+          border-bottom: 5px solid transparent;
           border-right: 5px solid #c7d2d0;
         }
       }
@@ -137,8 +139,6 @@
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 10px;
-    background: #fff;
-
 
     & .calendar__day {
       flex: 0 0 auto;
@@ -165,6 +165,7 @@
       &.calendar__day_selected {
         & span {
           border-radius: 50%;
+          background: #eb4f04;
           color: #fff;
         }
       }
@@ -202,17 +203,23 @@ const I18N = {
 }
 export default {
   props: {
-    startMonday: {
-      type: Boolean,
-      'default': false
-    },
-    startDate: {
-      type: Date,
+    currentView: {
+      type: Object,
       'default'() {
-        return new Date()
+        return {}
       }
     },
     decorate: {
+      type: Object,
+      'default'() {
+        return {}
+      }
+    },
+    i18n: {
+      type: String,
+      'default': 'en'
+    },
+    indicator: {
       type: Object,
       'default'() {
         return {}
@@ -224,33 +231,19 @@ export default {
         return new Date()
       }
     },
+    startMonday: {
+      type: Boolean,
+      'default': false
+    },
+    startDate: {
+      type: Date,
+      'default'() {
+        return new Date()
+      }
+    },
     view: {
       type: String,
       'default': 'month'
-    },
-    currentView: {
-      type: Object,
-      'default'() {
-        return {}
-      }
-    },
-    headerBackgroundColor: {
-      type: String,
-      'default': '#77c3f4'
-    },
-    selectedItemColor: {
-      type: String,
-      'default': '#EB4F04'
-    },
-    indicator: {
-      type: Object,
-      'default'() {
-        return {}
-      }
-    },
-    i18n: {
-      type: String,
-      'default': 'en'
     }
   },
   computed: {
