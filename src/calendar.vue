@@ -264,7 +264,7 @@ export default {
       &.calendar__day_now {
         & span {
             border-radius: 50%;
-            background: #ccc;
+            background: #f5a781;
             color: #fff !important;
         }
       }
