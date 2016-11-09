@@ -1,37 +1,37 @@
 <template>
-  <calendar :decorate="decorate" :view="'week'" :header-background-color="headerBackgroundColor" :selected.sync="selected" :current-view.sync="currentView" :indicator="indicator">
-    <div slot="action" class="action">日</div>
-  </calendar>
+  <div class="main">
+    <div>
+      <h1 class="title">calendar demo</h1>
+      <calendar-demo></calendar-demo>
+    </div>
+  </div>
 </template>
 
-<style scoped>
-  .action {
-    padding: 5px;
-    border-radius: 2px;
-    background: #31b29c;
-    color: #fff;
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Tahoma, Arial, Helvetica, STHeiti;
+  }
+  .title {
+    text-align: center;
+    padding: 10px;
+    color: #31b29c;
   }
 </style>
 
 <script>
-  import Calendar from '../src/calendar.vue'
+  import CalendarDemo from './calendar-demo.vue'
+
   export default {
-    data() {
-      return {
-        selected: new Date(),
-        decorate: {
-          '2016-11-07': true,
-          '2016-08-10': true,
-          '2016-08-11': true
-        },
-        indicator: {
-        },
-        headerBackgroundColor: '#77c3f4',
-        currentView: {}
-      }
-    },
     components: {
-      Calendar
+      CalendarDemo
     }
   }
 </script>
