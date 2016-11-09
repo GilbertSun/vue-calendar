@@ -1,5 +1,5 @@
 <template>
-  <calendar :view="view" :decorate="decorate">
+  <calendar :view="view" :decorate="decorate" :current-view.sync="currentView" :start-date.sync="startDate" :indicator="indicator">
     <div class="actions" slot="action">
       <div class="action" @click="changeView">{{viewName}}</div>
       <div class="action" @click="addEvent">加</div>
@@ -24,7 +24,10 @@
     data() {
       return {
         view: 'week',
-        decorate: {}
+        decorate: {},
+        currentView: {},
+        indicator: {},
+        startDate: new Date
       }
     },
     computed: {
@@ -38,7 +41,21 @@
         }
       }
     },
+    watch: {
+      startDate(startDate) {
+        this.dealWithIndicator(startDate)
+      }
+    },
     methods: {
+      dealWithIndicator(startDate) {
+        let indicator = {}
+        if (startDate.getMonth() <= 6) {
+          indicator.title = startDate.getFullYear() + '上学期'
+        } else {
+          indicator.title = startDate.getFullYear() + '下学期'
+        }
+        this.indicator = indicator
+      },
       changeView() {
         if (this.view === 'week') {
           this.view = 'month'
@@ -55,6 +72,9 @@
           })
         }
       }
+    },
+    created() {
+      this.dealWithIndicator(this.startDate)
     },
     components: {
       Calendar

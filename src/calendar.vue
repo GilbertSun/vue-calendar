@@ -205,6 +205,7 @@ export default {
   props: {
     currentView: {
       type: Object,
+      twoWay: true,
       'default'() {
         return {}
       }
@@ -227,6 +228,7 @@ export default {
     },
     selected: {
       type: Date,
+      twoWay: true,
       'default'() {
         return new Date()
       }
@@ -237,6 +239,7 @@ export default {
     },
     startDate: {
       type: Date,
+      twoWay: true,
       'default'() {
         return new Date()
       }
