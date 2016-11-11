@@ -348,7 +348,7 @@ export default {
         this.startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate() - 7)
       }
       this.$nextTick(() => {
-        this.$emit('')
+        this.$emit('prev')
       })
     },
     nextView() {
@@ -357,6 +357,9 @@ export default {
       } else {
         this.startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate() + 7)
       }
+      this.$nextTick(() => {
+        this.$emit('next')
+      })
     },
     select(day) {
       this.selected = day
