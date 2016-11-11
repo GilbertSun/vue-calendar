@@ -303,7 +303,7 @@ export default {
       get() {
         let weekDayNames = I18N[this.i18n]
         if (this.startMonday) {
-          let sunday = weekDayNames.shif()
+          let sunday = weekDayNames.shift()
           weekDayNames.push(sunday)
         }
         return weekDayNames
@@ -347,6 +347,9 @@ export default {
       } else {
         this.startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate() - 7)
       }
+      this.$nextTick(() => {
+        this.$emit('')
+      })
     },
     nextView() {
       if (this.view === 'month') {

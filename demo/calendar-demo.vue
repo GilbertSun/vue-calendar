@@ -1,5 +1,5 @@
 <template>
-  <calendar :view="view" :decorate="decorate" :current-view.sync="currentView" :start-date.sync="startDate" :indicator="indicator">
+  <calendar :view="view" :decorate="decorate" :current-view.sync="currentView" :start-date.sync="startDate" :indicator="indicator" :start-monday="true">
     <div class="actions" slot="action">
       <div class="action" @click="changeView">{{viewName}}</div>
       <div class="action" @click="addEvent">加</div>
