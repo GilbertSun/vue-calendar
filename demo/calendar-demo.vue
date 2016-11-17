@@ -1,5 +1,5 @@
 <template>
-  <calendar :view="view" :decorate="decorate" :current-view.sync="currentView" :start-date.sync="startDate" :indicator="indicator" :start-monday="true" @prev="prev" @next="next">
+  <calendar :view="view" :decorate="decorate" :current-view.sync="currentView" :start-date.sync="startDate" :indicator="indicator" :start-monday="true" @prev="prev" @next="next" @today="today">
     <div class="actions" slot="action">
       <div class="action" @click="changeView">{{viewName}}</div>
       <div class="action" @click="addEvent">加</div>
@@ -77,6 +77,9 @@
       },
       next() {
         console.log('next clicked')
+      },
+      today() {
+        console.log('today clicked')
       }
     },
     created() {

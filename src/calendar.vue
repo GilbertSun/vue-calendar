@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="calendar__main">
-      <div class="calendar__today" @click="startDate = new Date, selected = new Date">
+      <div class="calendar__today" @click="goToday">
         今天
       </div>
       <div class="calendar__date">
@@ -363,6 +363,13 @@ export default {
     },
     select(day) {
       this.selected = day
+    },
+    goToday() {
+      this.startDate = new Date
+      this.selected = new Date
+      this.$nextTick(() => {
+        this.$emit('today')
+      })
     }
   },
   ready() {
