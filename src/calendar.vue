@@ -166,7 +166,7 @@
         & span {
           border-radius: 50%;
           background: #eb4f04;
-          color: #fff;
+          color: #fff !important;
         }
       }
       &.calendar__day_othermonth {
