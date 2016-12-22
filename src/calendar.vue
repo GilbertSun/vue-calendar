@@ -2,7 +2,7 @@
   <div class="calendar">
     <div class="calendar__header">
       <!-- 年份 月份 -->
-      <div class="calendar__control">
+      <div class="calendar__control" :class="{'calendar__control_center': centerHeader}">
         <div class="calendar__arrow left" @click="prevView"></div>
         <div class="calendar__indicator">
           <span class="calendar__indicator-title">{{shownIndicator.title}}</span>
@@ -58,12 +58,14 @@
   }
   & .calendar__control {
     width: 240px;
-    margin: 0 auto;
     padding: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
     color: #1e2329;
+    &.calendar__control_center {
+      margin: 0 auto;
+    }
 
     & .calendar__indicator {
       display: flex;
@@ -247,6 +249,10 @@ export default {
     view: {
       type: String,
       'default': 'month'
+    },
+    centerHeader: {
+      type: Boolean,
+      'default': true
     }
   },
   computed: {
