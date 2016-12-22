@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:GilbertSun/bh-calendar.git"
+    "url": "git@github.com:GilbertSun/vue-calendar.git"
   },
   "files": [
     "lib",
