@@ -26,8 +26,14 @@
         view: 'week',
         decorate: {},
         sub: {
-          '2016-12-22': '休',
-          '2016-12-27': '杀'
+          '2016-12-22': {
+            content: '休',
+            color: '#31b29c'
+          },
+          '2016-12-27': {
+            content: '班',
+            color: '#eb4f04'
+          }
         },
         currentView: {},
         indicator: {},
