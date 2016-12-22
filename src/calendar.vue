@@ -28,8 +28,7 @@
           <div class="calendar__day" v-for="day in days"
                :class="{'calendar__day_now': checkToday(day), 'calendar__day_selected': checkSelected(day), 'calendar__day_othermonth': checkOtherMonth(day), 'calendar__day_decorate': checkDecorate(day)}"
                @click="select(day)">
-            <span v-if="checkSelected(day)">{{day.getDate()}}</span>
-            <span v-else>{{day.getDate()}}</span>
+            <span>{{day.getDate()}}<i class="sub" v-if="checkSub(day)">{{checkSub(day)}}</i></span>
           </div>
         </div>
       </div>
@@ -143,6 +142,7 @@
     padding-bottom: 10px;
 
     & .calendar__day {
+      position: relative;
       flex: 0 0 auto;
       display: inline-block;
       width: 14.2%;
@@ -150,7 +150,16 @@
       text-align: center;
       font-size: 12px;
       color: #000;
+      & .sub {
+        font-size: 8px;
+        line-height: 8px;
+        position: absolute;
+        top: 0;
+        left: 30px;
+        color: #31b29c;
+      }
       & span {
+          position: relative;
           display: inline-block;
           width: 30px;
           height: 30px;
@@ -213,6 +222,12 @@ export default {
       }
     },
     decorate: {
+      type: Object,
+      'default'() {
+        return {}
+      }
+    },
+    sub: {
       type: Object,
       'default'() {
         return {}
@@ -346,6 +361,10 @@ export default {
     checkDecorate(day) {
       let dateFormat = day.getFullYear() + '-' + ('0' + (day.getMonth() + 1)).slice(-2) + '-' + ('0' + (day.getDate())).slice(-2)
       return !!this.decorate[dateFormat]
+    },
+    checkSub(day) {
+      let dateFormat = day.getFullYear() + '-' + ('0' + (day.getMonth() + 1)).slice(-2) + '-' + ('0' + (day.getDate())).slice(-2)
+      return this.sub[dateFormat]
     },
     prevView() {
       if (this.view === 'month') {

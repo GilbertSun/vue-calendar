@@ -1,5 +1,5 @@
 <template>
-  <calendar :view="view" :decorate="decorate" :current-view.sync="currentView" :start-date.sync="startDate" :indicator="indicator" :start-monday="true" @prev="prev" @next="next" @today="today">
+  <calendar :view="view" :decorate="decorate" :sub="sub" :current-view.sync="currentView" :start-date.sync="startDate" :indicator="indicator" :start-monday="true" @prev="prev" @next="next" @today="today">
     <div class="actions" slot="action">
       <div class="action" @click="changeView">{{viewName}}</div>
       <div class="action" @click="addEvent">加</div>
@@ -25,6 +25,10 @@
       return {
         view: 'week',
         decorate: {},
+        sub: {
+          '2016-12-22': '休',
+          '2016-12-27': '杀'
+        },
         currentView: {},
         indicator: {},
         startDate: new Date
