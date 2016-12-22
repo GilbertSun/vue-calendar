@@ -67,4 +67,5 @@ $ make pub
 | startMonday           | Boolean | is the week start from monday, true for monday and false for sunday | true | false |
 | startDate             | Date    | this start Date to control the first view to show startDate | new Date(2016, 11, 6) | new Date() |
 | view                  | String  | show to month view of week view | 'month', 'week' | 'month' |
+| centerHeader          | Boolean | control the calendar header position | true | false |
 
