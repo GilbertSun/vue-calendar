@@ -1,6 +1,6 @@
 {
   "name": "vue-calendar-mobile",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A calendar component for vue.js",
   "main": "lib/index.js",
   "author": "GilbertSun <szb4321@gmail.com>",
@@ -19,8 +19,7 @@
     "lib",
     "src"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-runtime": "^6.0.0",
     "babel-core": "^6.0.0",
