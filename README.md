@@ -61,6 +61,7 @@ $ make pub
 |:----------------------|:--------|:-------------: |:-------- |:-------- |
 | currentView           | Object  | cureent shown view | {}, simple pass a clean object | `{start: Object, end: Object}` |
 | decorate              | Object  | control the date to have a dot docorate | `{'2016-08-09': true}` | {} |
+| sub                   | Object  | control the date sub decorate | `{'2016-08-09': {content: '休', color: '班'}}}` | {} |
 | i18n                  | String  | control week name language | `'zh-cn', 'en'` | `'zh-cn'` |
 | indicator             | Object  | control the header indicator default the year and month| `{title: ..., main: ...}` | `{}` |
 | selected              | Date    | current select date | new Date(2016, 11, 6) | new Date() |
