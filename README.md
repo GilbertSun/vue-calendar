@@ -9,7 +9,7 @@ website: [GilbertSun/vue-calendar](http://gilbertsun.github.io/vue-calendar)
 ## install & use
 
 ```
-npm install vue-mobile-calendar
+npm install vue-calendar-mobile
 ```
 
 use in a vue component
