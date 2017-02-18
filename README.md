@@ -1,6 +1,6 @@
 vue-calendar
 ===
-A calendar component for vue.js **compitable with vue 1.x**
+A calendar component for vue.js **compitable with vue 2.x**
 
 ## examples
 
@@ -8,8 +8,11 @@ website: [GilbertSun/vue-calendar](http://gilbertsun.github.io/vue-calendar)
 
 ## install & use
 
-```
+```bash
 npm install vue-calendar-mobile
+
+# for 1.x
+npm install vue-calendar-mobile@1
 ```
 
 use in a vue component
