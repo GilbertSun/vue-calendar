@@ -328,6 +328,7 @@ export default {
     weekDays: {
       get() {
         let weekDayNames = JSON.parse(JSON.stringify(I18N[this.i18n]))
+
         if (this.startMonday) {
           let sunday = weekDayNames.shift()
           weekDayNames.push(sunday)
