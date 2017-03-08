@@ -10,7 +10,7 @@ dev: install
 deploy:
 	npm run deploy
 
-pub:
+pub: install
 	npm run pub
 
 help:
