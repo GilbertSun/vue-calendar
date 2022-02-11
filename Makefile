@@ -2,7 +2,7 @@
 default: help
 
 install:
-	npm i --registry=https://registry.npm.taobao.org --ignore-scripts
+	npm i --registry=https://registry.npmmirror.com --ignore-scripts
 
 dev: install
 	npm run dev
